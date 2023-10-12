@@ -20,10 +20,6 @@ export class FootballApiService {
 
   constructor(private http: HttpClient) {}
 
-  getLeageResultLocal() {
-    return this.http.get<IResponseLeagueRequest>('./assets/leagueResult.json');
-  }
-
   getResponseLeague(
     id: string,
     season: string
@@ -85,7 +81,6 @@ export class FootballApiService {
   }
 
   getTenLastFixturesByTeam(
-    idLeague: number,
     season: number,
     idTeam: number
   ): Observable<IResponseFixtureRequest> {
@@ -96,7 +91,6 @@ export class FootballApiService {
 
     // Paramètres de la requête
     const params = new HttpParams()
-      .set('league', idLeague)
       .set('season', season)
       .set('team', idTeam)
       .set('last', 10);

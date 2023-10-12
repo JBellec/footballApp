@@ -6,12 +6,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CountrySelectorComponent } from './country-selector/country-selector.component';
 import { StandingsComponent } from './standings/standings.component';
+import { TeamDetailsComponent } from './team-details/team-details.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CountrySelectorComponent,
-    StandingsComponent
+    StandingsComponent,
+    TeamDetailsComponent
   ],
   imports: [
     HttpClientModule,

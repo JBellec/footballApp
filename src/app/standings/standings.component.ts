@@ -5,6 +5,7 @@ import { FootballApiService } from '../services/football-api/football-api.servic
 import { countriesLeague } from '../models/countriesLeague.model';
 import { leagueResult } from '../models/leagueResult.model';
 import { IResponseLeagueRequest } from '../models/responseLeagueRequest.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-standings',
@@ -16,21 +17,23 @@ export class StandingsComponent implements OnChanges {
 
   season = new Date().getFullYear().toString();
   leagueResults: leagueResult[] = [];
+  
+  constructor(private router: Router, private footballService: FootballApiService) {}
 
-  private footballService = inject(FootballApiService);
+  viewTeamDetails(idTeam: number) {
+    this.router.navigate(['/team-details', idTeam]);
+  }
 
   ngOnChanges(): void {
-    var response: Observable<IResponseLeagueRequest> =
-      this.footballService.getLeageResultLocal();
-
-    this.footballService
+    if(this.league){
+      this.footballService
       .getResponseLeague(this.league.id, this.season)
       .subscribe((res: IResponseLeagueRequest) => {
         this.leagueResults = this.footballService.mapIStandingsToLeagueResult(
           res!.response[0].league.standings[0]
         );
-
         return leagueResult;
       });
+    }
   }
 }
