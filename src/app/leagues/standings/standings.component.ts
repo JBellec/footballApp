@@ -1,11 +1,11 @@
 import { Component, Input, OnChanges, inject } from '@angular/core';
-import { Observable } from 'rxjs';
-
-import { FootballApiService } from '../services/football-api/football-api.service';
-import { countriesLeague } from '../models/countriesLeague.model';
-import { leagueResult } from '../models/leagueResult.model';
-import { IResponseLeagueRequest } from '../models/responseLeagueRequest.model';
 import { Router } from '@angular/router';
+
+import { countriesLeague } from 'src/app/models/countriesLeague.model';
+import { leagueResult } from 'src/app/models/leagueResult.model';
+import { IResponseLeagueRequest } from 'src/app/models/responseLeagueRequest.model';
+import { FootballApiService } from 'src/app/services/football-api/football-api.service';
+
 
 @Component({
   selector: 'app-standings',
@@ -14,15 +14,11 @@ import { Router } from '@angular/router';
 })
 export class StandingsComponent implements OnChanges {
   @Input() league!: countriesLeague;
-
+  
   season = new Date().getFullYear().toString();
   leagueResults: leagueResult[] = [];
   
-  constructor(private router: Router, private footballService: FootballApiService) {}
-
-  viewTeamDetails(idTeam: number) {
-    this.router.navigate(['/team-details', idTeam]);
-  }
+  constructor(private footballService: FootballApiService) {}
 
   ngOnChanges(): void {
     if(this.league){

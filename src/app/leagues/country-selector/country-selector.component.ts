@@ -1,7 +1,9 @@
 import { Component, Output, EventEmitter, OnInit, inject } from '@angular/core';
 
-import { LeaguesService } from '../services/leagues/leagues.service';
-import { countriesLeague } from '../models/countriesLeague.model';
+import { countriesLeague } from 'src/app/models/countriesLeague.model';
+import { LeaguesService } from 'src/app/services/leagues/leagues.service';
+
+
 
 @Component({
   selector: 'app-country-selector',

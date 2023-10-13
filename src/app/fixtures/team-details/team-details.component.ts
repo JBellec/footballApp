@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { FootballApiService } from '../services/football-api/football-api.service';
-import { IResponseFixtureRequest } from '../models/responseFixturesRequest.model';
+import { FootballApiService } from '../../services/football-api/football-api.service';
+import { IResponseFixtureRequest } from '../../models/responseFixturesRequest.model';
 
 @Component({
   selector: 'app-team-details',

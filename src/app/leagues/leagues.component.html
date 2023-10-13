@@ -1,0 +1,4 @@
+<app-country-selector
+  (selectedLeague)="onSelectLeague($event)"
+></app-country-selector>
+<app-standings [league]="selectedLeague"></app-standings>
