@@ -26,7 +26,6 @@ export class FootballApiService {
   ): Observable<IResponseLeagueRequest> {
     //Valeur de la clé du cache
     var cacheKey = id;
-
     // Vérifiez si les données sont en cache et non expirées.
     var cachedData = this.cacheService.get<IResponseLeagueRequest>(cacheKey);
 
