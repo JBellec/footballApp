@@ -12,22 +12,23 @@ import { IResponseFixtureRequest } from 'src/app/models/responseFixturesRequest.
 })
 export class FootballApiService {
   private apiBaseUrl = 'https://v3.football.api-sports.io/';
+  private leaguesEndpoint = 'leagues';
   private standingsEndpoint = 'standings';
   private fixturesEndpoint = 'fixtures';
   private apiKey = 'dbb2b2aa4e9e328396dc5168b20e5c37';
 
   private cacheService = inject(CacheService);
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
-  getResponseLeague(
+  getStandingsLeague(
     id: string,
     season: string
   ): Observable<IResponseLeagueRequest> {
     //Valeur de la clé du cache
     var cacheKey = id;
     // Vérifiez si les données sont en cache et non expirées.
-    var cachedData = this.cacheService.get<IResponseLeagueRequest>(cacheKey);
+    var cachedData = this.cacheService.getStandings<IResponseLeagueRequest>(cacheKey);
 
     if (cachedData) {
       console.log('Données trouvées dans le cache');
@@ -41,7 +42,6 @@ export class FootballApiService {
 
       // Paramètres de la requête
       const params = new HttpParams().set('league', id).set('season', season);
-      console.log('params : ' + params);
 
       return this.http
         .get<IResponseLeagueRequest>(this.apiBaseUrl + this.standingsEndpoint, {
@@ -50,57 +50,70 @@ export class FootballApiService {
         })
         .pipe(
           tap((data: IResponseLeagueRequest) => {
-            // Mettez les données en cache avec une durée de validité de 10 minutes (600 000 millisecondes).
-            console.log('Mise en cahce');
-            this.cacheService.set(cacheKey, data, 600000);
+            // Mise en cache avec une durée de validité de 10 minutes
+            console.log('Mise en cache');
+            this.cacheService.setStandings(cacheKey, data, 600000);
           })
         );
     }
   }
 
   mapIStandingsToLeagueResult(iStandings: IStandings[]): LeagueResult[] {
-    var leagueResults: LeagueResult[] = [];
-    iStandings.forEach((standings: IStandings) => {
-      leagueResults.push(
-        new LeagueResult(
-          standings.rank,
-          standings.team.logo,
-          standings.team.name,
-          standings.all.played,
-          standings.all.win,
-          standings.all.lose,
-          standings.all.draw,
-          standings.goalsDiff,
-          standings.points,
-          standings.team.id
-        )
+    return iStandings.map((standings: IStandings) => {
+      return new LeagueResult(
+        standings.rank,
+        standings.team.logo,
+        standings.team.name,
+        standings.all.played,
+        standings.all.win,
+        standings.all.lose,
+        standings.all.draw,
+        standings.goalsDiff,
+        standings.points,
+        standings.team.id
       );
     });
-    return leagueResults;
   }
 
   getTenLastFixturesByTeam(
     season: number,
     idTeam: number
   ): Observable<IResponseFixtureRequest> {
-    // Clé d'API à passer dans le header
-    const headers = new HttpHeaders()
-      .set('x-rapidapi-key', this.apiKey)
-      .set('x-rapidapi-host', 'v3.football.api-sports.io');
 
-    // Paramètres de la requête
-    const params = new HttpParams()
-      .set('season', season)
-      .set('team', idTeam)
-      .set('last', 10);
-    console.log('params : ' + params);
+    //Valeur de la clé du cache
+    var cacheKey = idTeam;
+    // Vérifiez si les données sont en cache et non expirées.
+    var cachedData = this.cacheService.getFixtures<IResponseFixtureRequest>(cacheKey);
 
-    return this.http.get<IResponseFixtureRequest>(
-      this.apiBaseUrl + this.fixturesEndpoint,
-      {
-        headers: headers,
-        params: params,
-      }
-    );
+    if (cachedData) {
+      console.log('Données trouvées dans le cache');
+      return of(cachedData);
+    } else {
+      // Clé d'API à passer dans le header
+      const headers = new HttpHeaders()
+        .set('x-rapidapi-key', this.apiKey)
+        .set('x-rapidapi-host', 'v3.football.api-sports.io');
+
+      // Paramètres de la requête
+      const params = new HttpParams()
+        .set('season', season)
+        .set('team', idTeam)
+        .set('last', 10);
+      console.log('params : ' + params);
+
+      return this.http.get<IResponseFixtureRequest>(
+        this.apiBaseUrl + this.fixturesEndpoint,
+        {
+          headers: headers,
+          params: params,
+        }
+      ).pipe(
+        tap((data: IResponseFixtureRequest) => {
+          // Mise en cache avec une durée de validité de 10 minutes
+          console.log('Mise en cache Fixtures');
+          this.cacheService.setFixtures(cacheKey, data, 600000);
+        })
+      );
+    }
   }
 }

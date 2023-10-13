@@ -38,7 +38,7 @@ export class StandingsComponent implements OnChanges, OnInit {
 
   private getStandingsData(leagueId: string, season: string) {
     this.footballService
-      .getResponseLeague(leagueId, season)
+      .getStandingsLeague(leagueId, season)
       .subscribe((res: IResponseLeagueRequest) => {
         this.leagueResults = this.footballService.mapIStandingsToLeagueResult(
           res!.response[0].league.standings[0]
