@@ -4,7 +4,7 @@ import { Observable, of, tap } from 'rxjs';
 
 import { CacheService } from '../cache/cache.service';
 import { IResponseLeagueRequest, IStandings } from 'src/app/models/responseLeagueRequest.model';
-import { leagueResult } from 'src/app/models/leagueResult.model';
+import { LeagueResult } from 'src/app/models/leagueResult.model';
 import { IResponseFixtureRequest } from 'src/app/models/responseFixturesRequest.model';
 
 @Injectable({
@@ -59,11 +59,11 @@ export class FootballApiService {
     }
   }
 
-  mapIStandingsToLeagueResult(iStandings: IStandings[]): leagueResult[] {
-    var leagueResults: leagueResult[] = [];
+  mapIStandingsToLeagueResult(iStandings: IStandings[]): LeagueResult[] {
+    var leagueResults: LeagueResult[] = [];
     iStandings.forEach((standings: IStandings) => {
       leagueResults.push(
-        new leagueResult(
+        new LeagueResult(
           standings.rank,
           standings.team.logo,
           standings.team.name,

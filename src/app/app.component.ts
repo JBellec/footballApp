@@ -7,10 +7,4 @@ import { countriesLeague } from './models/countriesLeague.model';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  selectedLeague!: countriesLeague;
-
-  onSelectLeague(league: countriesLeague) {
-      this.selectedLeague = league;
-      console.log(`Selected league : ${this.selectedLeague.name}`);
-    }
 }

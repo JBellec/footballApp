@@ -13,7 +13,7 @@
   <tr *ngFor="let result of leagueResults">
     <td>{{ result.rank }}</td>
     <td><img class="team-logo" src="{{ result.logo }}" /></td>
-    <a><td>{{ result.name }}</td></a>
+    <a routerLink="/team-details/{{result.idTeam}}"><td>{{ result.name }}</td></a>
     <td>{{ result.games }}</td>
     <td>{{ result.win }}</td>
     <td>{{ result.lose }}</td>

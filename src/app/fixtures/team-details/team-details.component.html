@@ -1,1 +1,16 @@
-<p>team-details works!</p>
+<table>
+    <tbody>
+        <ng-container *ngFor="let fixture of details">
+            <tr>
+                <td><img class="team-logo" src="{{ fixture.home.logo }}" /></td>
+                <td>{{ fixture.home.name }}</td>
+                <td>{{ fixture.home.goal }}</td>
+                <td>-</td>
+                <td>{{ fixture.away.goal }}</td>
+                <td>{{ fixture.away.name }}</td>
+                <td><img class="team-logo" src="{{ fixture.away.logo }}" /></td>
+            </tr>
+        </ng-container>
+    </tbody>
+</table>
+<button (click)="goBack()">Back</button>

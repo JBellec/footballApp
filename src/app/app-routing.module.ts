@@ -9,7 +9,7 @@ const routes: Routes = [
     loadChildren: () => import('./leagues/leagues.module').then((m) => m.LeaguesModule),
   },
   {
-    path: 'team-details/:teamId',
+    path: 'team-details/:idTeam',
     loadChildren: () => import('./fixtures/fixtures.module').then((m) => m.FixturesModule),
   },
   { path: '**', redirectTo: 'not-found' },

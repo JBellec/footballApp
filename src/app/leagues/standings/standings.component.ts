@@ -2,7 +2,7 @@ import { Component, Input, OnChanges, inject } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { countriesLeague } from 'src/app/models/countriesLeague.model';
-import { leagueResult } from 'src/app/models/leagueResult.model';
+import { LeagueResult } from 'src/app/models/leagueResult.model';
 import { IResponseLeagueRequest } from 'src/app/models/responseLeagueRequest.model';
 import { FootballApiService } from 'src/app/services/football-api/football-api.service';
 
@@ -16,7 +16,7 @@ export class StandingsComponent implements OnChanges {
   @Input() league!: countriesLeague;
   
   season = new Date().getFullYear().toString();
-  leagueResults: leagueResult[] = [];
+  leagueResults: LeagueResult[] = [];
   
   constructor(private footballService: FootballApiService) {}
 
@@ -28,7 +28,7 @@ export class StandingsComponent implements OnChanges {
         this.leagueResults = this.footballService.mapIStandingsToLeagueResult(
           res!.response[0].league.standings[0]
         );
-        return leagueResult;
+        return LeagueResult;
       });
     }
   }
