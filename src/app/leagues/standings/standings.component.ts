@@ -1,10 +1,11 @@
-import { Component, Input, OnChanges, OnInit, inject } from '@angular/core';
+import { Component, Input, OnChanges, OnDestroy, OnInit, inject } from '@angular/core';
+import { Subscription } from 'rxjs';
 
-import { countriesLeague } from 'src/app/models/countriesLeague.model';
+import { ICountriesLeague } from 'src/app/models/countriesLeague.model';
 import { LeagueResult } from 'src/app/models/leagueResult.model';
 import { IResponseLeagueRequest } from 'src/app/models/responseLeagueRequest.model';
-import { FootballApiService } from 'src/app/services/football-api/football-api.service';
-import { StandingStoreService } from 'src/app/services/standing-store/standing.service';
+import { StandingStoreService } from 'src/app/services/standings-store/standing-store.service';
+import { StandingsService } from 'src/app/services/standings/standings.service';
 
 
 @Component({
@@ -12,14 +13,15 @@ import { StandingStoreService } from 'src/app/services/standing-store/standing.s
   templateUrl: './standings.component.html',
   styleUrls: ['./standings.component.css'],
 })
-export class StandingsComponent implements OnChanges, OnInit {
+export class StandingsComponent implements OnChanges, OnInit, OnDestroy {
   
-  @Input() league!: countriesLeague;
+  @Input() league!: ICountriesLeague;
   
   season = new Date().getFullYear().toString();
   leagueResults: LeagueResult[] = [];
+  subs!: Subscription;
   
-  private footballService = inject(FootballApiService);
+  private standingsService = inject(StandingsService);
   private standingStoreService = inject(StandingStoreService);
 
   ngOnInit(): void {
@@ -37,13 +39,19 @@ export class StandingsComponent implements OnChanges, OnInit {
   }
 
   private getStandingsData(leagueId: string, season: string) {
-    this.footballService
+    this.subs = this.standingsService
       .getStandingsLeague(leagueId, season)
       .subscribe((res: IResponseLeagueRequest) => {
-        this.leagueResults = this.footballService.mapIStandingsToLeagueResult(
-          res!.response[0].league.standings[0]
-        );
+          if(res!.response.length > 0){
+            this.leagueResults = this.standingsService.mapIStandingsToLeagueResult(
+              res!.response[0]!.league!.standings[0]
+            );
+          }        
         return LeagueResult;
       });
+  }
+
+  ngOnDestroy(): void {
+    this.subs.unsubscribe();
   }
 }

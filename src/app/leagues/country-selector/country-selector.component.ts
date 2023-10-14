@@ -1,6 +1,7 @@
-import { Component, Output, EventEmitter, OnInit, inject } from '@angular/core';
+import { Component, Output, EventEmitter, OnInit, inject, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
 
-import { countriesLeague } from 'src/app/models/countriesLeague.model';
+import { ICountriesLeague } from 'src/app/models/countriesLeague.model';
 import { LeaguesService } from 'src/app/services/leagues/leagues.service';
 
 
@@ -10,20 +11,27 @@ import { LeaguesService } from 'src/app/services/leagues/leagues.service';
   templateUrl: './country-selector.component.html',
   styleUrls: ['./country-selector.component.css'],
 })
-export class CountrySelectorComponent implements OnInit {
-  @Output() selectedLeague = new EventEmitter<countriesLeague>();
+export class CountrySelectorComponent implements OnInit, OnDestroy {
+  
+  @Output() selectedLeague = new EventEmitter<ICountriesLeague>();
 
-  leagues: countriesLeague[] = [];
+  leagues: ICountriesLeague[] = [];
 
   private leaguesService = inject(LeaguesService);
+  subs!: Subscription;
 
-  ngOnInit(): void {
-    this.leaguesService
-      .getAll()
-      .subscribe((res: countriesLeague[]) => (this.leagues = res));
-  }
-
-  selectLeague(league: countriesLeague) {
+  selectLeague(league: ICountriesLeague) {
     this.selectedLeague.emit(league);
   }
+
+  ngOnInit(): void {
+    this.subs = this.leaguesService
+      .getAll()
+      .subscribe((res: ICountriesLeague[]) => (this.leagues = res));
+  }
+
+  ngOnDestroy(): void {
+    this.subs.unsubscribe();
+  }
+
 }

@@ -1,5 +1,5 @@
 <div class="country-selector" *ngFor="let league of leagues">
-  <button id="{{ league.name }}Select" (click)="selectLeague(league)">
+  <button mat-raised-button id="{{ league.name }}Select" (click)="selectLeague(league)" >
     {{ league.name }}
   </button>
 </div>
