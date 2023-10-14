@@ -17,10 +17,6 @@ export class TeamDetailsComponent implements OnInit, OnDestroy {
   details: Fixtures[] = [];
 
   subs!: Subscription;
-
-  goBack() {
-    window.history.back();
-  }
   
   ngOnInit(): void {
     this.subs = this.route.params.subscribe(params => {
