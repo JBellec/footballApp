@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
-import {MatTableModule} from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 
 import { LeaguesComponent } from './leagues.component';
@@ -16,7 +15,6 @@ import { StandingsComponent } from './standings/standings.component';
   declarations: [CountrySelectorComponent, StandingsComponent, LeaguesComponent],
   imports: [
     MatButtonModule,
-    MatTableModule,
     CommonModule, RouterModule.forChild([
       { path: 'leagues', component: LeaguesComponent },
       { path: '', redirectTo: 'leagues', pathMatch: 'full' },

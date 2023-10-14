@@ -1,15 +1,14 @@
 <table>
-    <tbody>
-        <ng-container *ngFor="let fixture of details">
-            <tr>
-                <td><img class="team-logo" src="{{ fixture.home.logo }}" /></td>
-                <td>{{ fixture.home.name }}</td>
-                <td>{{ fixture.home.goal }}</td>
-                <td>-</td>
-                <td>{{ fixture.away.goal }}</td>
-                <td>{{ fixture.away.name }}</td>
-                <td><img class="team-logo" src="{{ fixture.away.logo }}" /></td>
-            </tr>
-        </ng-container>
+    <ng-container *ngFor="let fixture of details">
+        <tr>
+            <td><img class="team-logo" src="{{ fixture.home.logo }}" /></td>
+            <td>{{ fixture.home.name }}</td>
+            <td>{{ fixture.home.goal }}</td>
+            <td>-</td>
+            <td>{{ fixture.away.goal }}</td>
+            <td>{{ fixture.away.name }}</td>
+            <td><img class="team-logo" src="{{ fixture.away.logo }}" /></td>
+        </tr>
+    </ng-container>
 </table>
-<button routerLink="/">Back</button>
+<button mat-raised-button color="primary" routerLink="/">Back</button>

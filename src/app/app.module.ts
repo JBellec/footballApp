@@ -17,7 +17,7 @@ import { FixturesModule } from './fixtures/fixtures.module';
     BrowserModule,
     LeaguesModule,
     FixturesModule,
-    AppRoutingModule
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

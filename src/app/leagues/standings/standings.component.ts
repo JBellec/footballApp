@@ -7,7 +7,6 @@ import { IResponseLeagueRequest } from '../../models/responseLeagueRequest.model
 import { StandingStoreService } from '../../services/standings-store/standing-store.service';
 import { StandingsService } from '../../services/standings/standings.service';
 
-
 @Component({
   selector: 'app-standings',
   templateUrl: './standings.component.html',
