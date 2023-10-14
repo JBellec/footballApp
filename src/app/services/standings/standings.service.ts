@@ -2,10 +2,10 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Observable, of, tap } from 'rxjs';
 
-import { LeagueResult } from 'src/app/models/leagueResult.model';
-import { IResponseLeagueRequest, IStandings } from 'src/app/models/responseLeagueRequest.model';
+import { LeagueResult } from '../../models/leagueResult.model';
+import { IResponseLeagueRequest, IStandings } from '../../models/responseLeagueRequest.model';
 import { CacheStandingsService } from '../cache/cache-standings/cache-standing.service';
-import { API_BASE_URL, API_KEY, STANDINGS_ENDPOINT } from 'src/app/config/api.config';
+import { API_BASE_URL, API_KEY, STANDINGS_ENDPOINT } from '../../config/api.config';
 
 @Injectable({
   providedIn: 'root'

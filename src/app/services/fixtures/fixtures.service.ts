@@ -2,8 +2,8 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable, of, tap } from 'rxjs';
 
-import { IResponseFixtureRequest } from 'src/app/models/responseFixturesRequest.model';
-import { API_BASE_URL, API_KEY, FIXTURES_ENDPOINT } from 'src/app/config/api.config';
+import { IResponseFixtureRequest } from '../../models/responseFixturesRequest.model';
+import { API_BASE_URL, API_KEY, FIXTURES_ENDPOINT } from '../../config/api.config';
 import { CacheFixturesService } from '../cache/cache-fixtures/cache-fixtures.service';
 
 @Injectable({

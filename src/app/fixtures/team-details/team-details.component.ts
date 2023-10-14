@@ -2,8 +2,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { IResponseFixtureRequest } from '../../models/responseFixturesRequest.model';
-import { Fixtures } from 'src/app/models/fixtures.model';
-import { FixturesService } from 'src/app/services/fixtures/fixtures.service';
+import { Fixtures } from '../../models/fixtures.model';
+import { FixturesService } from '../../services/fixtures/fixtures.service';
 import { Subscription } from 'rxjs';
 
 @Component({

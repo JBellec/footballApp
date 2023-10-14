@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { ICountriesLeague } from 'src/app/models/countriesLeague.model';
+
+import { ICountriesLeague } from '../../../models/countriesLeague.model';
 
 @Injectable({
   providedIn: 'root'

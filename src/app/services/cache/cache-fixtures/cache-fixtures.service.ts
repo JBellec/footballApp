@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { IResponseFixtureRequest } from 'src/app/models/responseFixturesRequest.model';
+import { IResponseFixtureRequest } from '../../../models/responseFixturesRequest.model';
 
 @Injectable({
   providedIn: 'root'

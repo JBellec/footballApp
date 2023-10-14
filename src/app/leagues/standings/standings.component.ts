@@ -1,11 +1,11 @@
 import { Component, Input, OnChanges, OnDestroy, OnInit, inject } from '@angular/core';
 import { Subscription } from 'rxjs';
 
-import { ICountriesLeague } from 'src/app/models/countriesLeague.model';
-import { LeagueResult } from 'src/app/models/leagueResult.model';
-import { IResponseLeagueRequest } from 'src/app/models/responseLeagueRequest.model';
-import { StandingStoreService } from 'src/app/services/standings-store/standing-store.service';
-import { StandingsService } from 'src/app/services/standings/standings.service';
+import { ICountriesLeague } from '../../models/countriesLeague.model';
+import { LeagueResult } from '../../models/leagueResult.model';
+import { IResponseLeagueRequest } from '../../models/responseLeagueRequest.model';
+import { StandingStoreService } from '../../services/standings-store/standing-store.service';
+import { StandingsService } from '../../services/standings/standings.service';
 
 
 @Component({

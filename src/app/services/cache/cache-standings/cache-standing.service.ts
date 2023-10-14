@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { IResponseLeagueRequest } from 'src/app/models/responseLeagueRequest.model';
+import { IResponseLeagueRequest } from '../../../models/responseLeagueRequest.model';
 
 @Injectable({
   providedIn: 'root'

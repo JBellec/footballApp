@@ -1,9 +1,8 @@
 import { Component, Output, EventEmitter, OnInit, inject, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 
-import { ICountriesLeague } from 'src/app/models/countriesLeague.model';
-import { LeaguesService } from 'src/app/services/leagues/leagues.service';
-
+import { ICountriesLeague } from '../../models/countriesLeague.model';
+import { LeaguesService } from '../../services/leagues/leagues.service';
 
 
 @Component({
