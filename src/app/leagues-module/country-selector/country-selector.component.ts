@@ -2,9 +2,9 @@ import { Component, Output, EventEmitter, OnInit, inject, OnDestroy } from '@ang
 import { Subscription } from 'rxjs';
 
 import { LeaguesService } from '../../services/leagues/leagues.service';
-import { IResponseLeaguesRequest } from 'src/app/models/responseLeaguesRequest.model';
-import { Leagues } from 'src/app/models/countriesLeague.model';
-import { countriesList } from 'src/app/config/api.config';
+import { IResponseLeaguesRequest } from '../../models/responseLeaguesRequest.model';
+import { Leagues } from '../../models/countriesLeague.model';
+import { countriesList } from '../../config/api.config';
 
 
 @Component({

@@ -5,7 +5,7 @@ import { Observable, of, tap } from 'rxjs';
 import { IFixtureResponse, IFixtureTeam, IResponseFixtureRequest } from '../../models/responseFixturesRequest.model';
 import { API_BASE_URL, API_KEY, FIXTURES_ENDPOINT } from '../../config/api.config';
 import { CacheFixturesService } from '../cache/cache-fixtures/cache-fixtures.service';
-import { Fixtures, Team } from 'src/app/models/fixtures.model';
+import { Fixtures, Team } from '../../models/fixtures.model';
 
 @Injectable({
   providedIn: 'root'
