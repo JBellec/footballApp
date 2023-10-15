@@ -4,8 +4,8 @@ import { Observable, of, tap } from 'rxjs';
 
 import { Leagues } from '../../models/countriesLeague.model';
 import { CacheLeaguesService } from '../cache/cache-leagues/cache-leagues.service';
-import { API_BASE_URL, API_KEY, LEAGUES_ENDPOINT, STANDINGS_ENDPOINT } from 'src/app/config/api.config';
-import { ILeagues, ILeaguesResponse, IResponseLeaguesRequest } from 'src/app/models/responseLeaguesRequest.model';
+import { API_BASE_URL, API_KEY, LEAGUES_ENDPOINT, STANDINGS_ENDPOINT } from '../../config/api.config';
+import { ILeagues, ILeaguesResponse, IResponseLeaguesRequest } from '../../models/responseLeaguesRequest.model';
 
 
 @Injectable({
