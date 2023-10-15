@@ -2,9 +2,10 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable, of, tap } from 'rxjs';
 
-import { IResponseFixtureRequest } from '../../models/responseFixturesRequest.model';
+import { IFixtureResponse, IFixtureTeam, IResponseFixtureRequest } from '../../models/responseFixturesRequest.model';
 import { API_BASE_URL, API_KEY, FIXTURES_ENDPOINT } from '../../config/api.config';
 import { CacheFixturesService } from '../cache/cache-fixtures/cache-fixtures.service';
+import { Fixtures, Team } from 'src/app/models/fixtures.model';
 
 @Injectable({
   providedIn: 'root'
@@ -39,7 +40,6 @@ export class FixturesService {
         .set('season', season)
         .set('team', idTeam)
         .set('last', 10);
-      console.log('params : ' + params);
 
       return this.http.get<IResponseFixtureRequest>(
         API_BASE_URL + FIXTURES_ENDPOINT,
@@ -55,5 +55,22 @@ export class FixturesService {
         })
       );
     }
+  }
+
+  mapIFixtureResponseToFixtures(fixtureResponse: IFixtureResponse): Fixtures {
+    const homeTeam = this.mapIFixtureTeamToTeam(fixtureResponse.teams.home, fixtureResponse.goals.home);
+    const awayTeam = this.mapIFixtureTeamToTeam(fixtureResponse.teams.away, fixtureResponse.goals.away);
+
+    return new Fixtures(homeTeam, awayTeam);
+  }
+
+  mapIFixtureTeamToTeam(fixtureTeam: IFixtureTeam, goal: number): Team {
+    return new Team(
+      fixtureTeam.id,
+      fixtureTeam.name,
+      fixtureTeam.logo,
+      fixtureTeam.winner,
+      goal
+    );
   }
 }

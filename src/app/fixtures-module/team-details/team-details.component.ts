@@ -13,23 +13,23 @@ import { Subscription } from 'rxjs';
 })
 export class TeamDetailsComponent implements OnInit, OnDestroy {
 
-  constructor(private route: ActivatedRoute, private fixturesService: FixturesService) {}
+  constructor(private route: ActivatedRoute, private fixturesService: FixturesService) { }
   details: Fixtures[] = [];
 
   subs!: Subscription;
-  
+
   ngOnInit(): void {
     this.subs = this.route.params.subscribe(params => {
       const idTeam = params['idTeam'];
-      this.fixturesService.getTenLastFixturesByTeam(2023,idTeam).subscribe((res: IResponseFixtureRequest)=>{
+      this.fixturesService.getTenLastFixturesByTeam(2023, idTeam).subscribe((res: IResponseFixtureRequest) => {
         res!.response.forEach(elem => {
-          var fixture: Fixtures = Fixtures.fromApiResponse(elem);
+          var fixture: Fixtures = this.fixturesService.mapIFixtureResponseToFixtures(elem);
           this.details.push(fixture);
         })
       })
     });
   }
-  
+
   ngOnDestroy(): void {
     this.subs.unsubscribe();
   }

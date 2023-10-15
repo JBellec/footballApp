@@ -5,8 +5,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { LeaguesModule } from './leagues/leagues.module';
-import { FixturesModule } from './fixtures/fixtures.module';
+import { LeaguesModule } from './leagues-module/leagues.module';
+import { FixturesModule } from './fixtures-module/fixtures.module';
 
 @NgModule({
   declarations: [
