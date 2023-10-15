@@ -4,9 +4,9 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class StandingStoreService {
-  private standing: string='';
+  private standing: number =0;
 
-  setSelectedStanding(standing: string) {
+  setSelectedStanding(standing: number) {
     this.standing = standing;
   }
 

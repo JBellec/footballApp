@@ -1,8 +1,10 @@
 import { Component, Output, EventEmitter, OnInit, inject, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 
-import { ICountriesLeague } from '../../models/countriesLeague.model';
 import { LeaguesService } from '../../services/leagues/leagues.service';
+import { IResponseLeaguesRequest } from 'src/app/models/responseLeaguesRequest.model';
+import { Leagues } from 'src/app/models/countriesLeague.model';
+import { countriesList } from 'src/app/config/api.config';
 
 
 @Component({
@@ -12,21 +14,28 @@ import { LeaguesService } from '../../services/leagues/leagues.service';
 })
 export class CountrySelectorComponent implements OnInit, OnDestroy {
   
-  @Output() selectedLeague = new EventEmitter<ICountriesLeague>();
+  @Output() selectedLeague = new EventEmitter<Leagues>();
 
-  leagues: ICountriesLeague[] = [];
+  leagues: Leagues[] = [];
 
   private leaguesService = inject(LeaguesService);
   subs!: Subscription;
 
-  selectLeague(league: ICountriesLeague) {
+  selectLeague(league: Leagues) {
     this.selectedLeague.emit(league);
   }
 
   ngOnInit(): void {
-    this.subs = this.leaguesService
-      .getAll()
-      .subscribe((res: ICountriesLeague[]) => (this.leagues = res));
+
+    for (var country of countriesList) {
+      this.subs = this.leaguesService
+        .getLeagues(country.name, country.leagueName)
+          .subscribe((res: IResponseLeaguesRequest) => {
+            if(res!.response.length > 0){
+              this.leagues.push(this.leaguesService.mapILeaguesToICountriesLeague(res!.response[0]));
+            }
+          });
+    }
   }
 
   ngOnDestroy(): void {

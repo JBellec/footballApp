@@ -1,36 +1,36 @@
 import { Injectable } from '@angular/core';
 
-import { ICountriesLeague } from '../../../models/countriesLeague.model';
+import { IResponseLeaguesRequest } from 'src/app/models/responseLeaguesRequest.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CacheLeaguesService {
 
-  private cacheStandings: {
-    [key: string]: { data: ICountriesLeague; expiry: number };
+  private cacheLeagues: {
+    [key: string]: { data: IResponseLeaguesRequest; expiry: number };
   } = {};
 
-  getStandings<T>(key: string): ICountriesLeague | null {
-    const cachedData = this.cacheStandings[key];
+  getLeagues<T>(key: string): IResponseLeaguesRequest | null {
+    const cachedData = this.cacheLeagues[key];
     if (cachedData) {
       if (Date.now() < cachedData.expiry) {
-        return cachedData.data as ICountriesLeague;
+        return cachedData.data as IResponseLeaguesRequest;
       } else {
         // L'élément du cache a expiré, donc nous le supprimons.
         console.log('Cache expiré, suppression');
-        delete this.cacheStandings[key];
+        delete this.cacheLeagues[key];
       }
     }
     return null;
   }
 
-  setStandings<T>(
+  setLeagues<T>(
     key: string,
-    data: ICountriesLeague,
+    data: IResponseLeaguesRequest,
     ttl: number = 3600000
   ): void {
     const expiry = Date.now() + ttl;
-    this.cacheStandings[key] = { data, expiry };
+    this.cacheLeagues[key] = { data, expiry };
   }
 }

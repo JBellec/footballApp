@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { ICountriesLeague } from '../models/countriesLeague.model';
+import { Leagues } from '../models/countriesLeague.model';
 
 @Component({
   selector: 'app-leagues',
@@ -8,9 +8,9 @@ import { ICountriesLeague } from '../models/countriesLeague.model';
   styleUrls: ['./leagues.component.css']
 })
 export class LeaguesComponent {
-  selectedLeague!: ICountriesLeague;
+  selectedLeague!: Leagues;
 
-  onSelectLeague(league: ICountriesLeague) {
+  onSelectLeague(league: Leagues) {
       this.selectedLeague = league;
     }
 }

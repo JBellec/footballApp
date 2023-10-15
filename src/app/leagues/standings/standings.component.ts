@@ -1,9 +1,9 @@
 import { Component, Input, OnChanges, OnDestroy, OnInit, inject } from '@angular/core';
 import { Subscription } from 'rxjs';
 
-import { ICountriesLeague } from '../../models/countriesLeague.model';
-import { LeagueResult } from '../../models/leagueResult.model';
-import { IResponseLeagueRequest } from '../../models/responseLeagueRequest.model';
+import { Leagues } from '../../models/countriesLeague.model';
+import { Standings } from '../../models/standings.model';
+import { IResponseStandingsRequest } from '../../models/responseStandingsRequest.model';
 import { StandingStoreService } from '../../services/standings-store/standing-store.service';
 import { StandingsService } from '../../services/standings/standings.service';
 
@@ -14,10 +14,10 @@ import { StandingsService } from '../../services/standings/standings.service';
 })
 export class StandingsComponent implements OnChanges, OnInit, OnDestroy {
   
-  @Input() league!: ICountriesLeague;
+  @Input() league!: Leagues;
   
   season = new Date().getFullYear().toString();
-  leagueResults: LeagueResult[] = [];
+  leagueResults: Standings[] = [];
   subs!: Subscription;
   
   private standingsService = inject(StandingsService);
@@ -25,7 +25,7 @@ export class StandingsComponent implements OnChanges, OnInit, OnDestroy {
 
   ngOnInit(): void {
     var storedStanding = this.standingStoreService.getSelectedStanding();
-    if(storedStanding !==''){
+    if(storedStanding !==0){
       this.getStandingsData(storedStanding, this.season);
     }
   }
@@ -37,16 +37,16 @@ export class StandingsComponent implements OnChanges, OnInit, OnDestroy {
     }
   }
 
-  private getStandingsData(leagueId: string, season: string) {
+  private getStandingsData(leagueId: number, season: string) {
     this.subs = this.standingsService
       .getStandingsLeague(leagueId, season)
-      .subscribe((res: IResponseLeagueRequest) => {
+      .subscribe((res: IResponseStandingsRequest) => {
           if(res!.response.length > 0){
             this.leagueResults = this.standingsService.mapIStandingsToLeagueResult(
               res!.response[0]!.league!.standings[0]
             );
           }        
-        return LeagueResult;
+        return Standings;
       });
   }
 

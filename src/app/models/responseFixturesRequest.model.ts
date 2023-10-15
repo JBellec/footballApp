@@ -1,4 +1,4 @@
-import { ILeague } from './responseLeagueRequest.model';
+import { ILeague } from './responseStandingsRequest.model';
 
 export interface IResponseFixtureRequest {
   get: string;

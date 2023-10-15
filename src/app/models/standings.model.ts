@@ -1,4 +1,4 @@
-export class LeagueResult {
+export class Standings {
   rank: number;
   logo: string;
   name: string;

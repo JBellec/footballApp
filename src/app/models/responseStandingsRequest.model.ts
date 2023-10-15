@@ -1,4 +1,4 @@
-export interface IResponseLeagueRequest {
+export interface IResponseStandingsRequest {
   get: string;
   results: number;
   response: Array<IResponse>;
